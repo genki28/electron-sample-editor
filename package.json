@@ -1,7 +1,7 @@
 {
   "name": "sample_text_editor",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "license": "MIT",
   "scripts": {
     "start": "run-p -r -l start:watch start:electron",
