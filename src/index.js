@@ -35,6 +35,7 @@ const createWindow = () => {
         height: 900,
         webPreferences: {
             enableRemoteModule: true,
+            contextIsolation: false,
             preload: path.join(electron_1.app.getAppPath(), "src/preload.js")
         }
     });
@@ -54,6 +55,14 @@ const setFontSize = (n) => {
     let w = electron_1.BrowserWindow.getFocusedWindow();
     w?.webContents.executeJavaScript('setFontSize(' + n + ')');
 };
+const openfolder = () => {
+    let w = electron_1.BrowserWindow.getFocusedWindow();
+    w?.webContents.executeJavaScript("openfolder()");
+};
+const createfile = () => {
+    let w = electron_1.BrowserWindow.getFocusedWindow();
+    w?.webContents.executeJavaScript("createfile()");
+};
 const createMenu = () => {
     let menuTemp = [
         {
@@ -61,6 +70,12 @@ const createMenu = () => {
             submenu: [
                 { label: "New", click: () => {
                         createWindow();
+                    } },
+                { label: "open folder...", click: () => {
+                        openfolder();
+                    } },
+                { label: "Create file", click: () => {
+                        createfile();
                     } },
                 { role: "close" },
                 { type: "separator" },

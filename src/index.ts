@@ -18,6 +18,7 @@ const createWindow = (): number => {
     height: 900,
     webPreferences: {
       enableRemoteModule: true,
+      contextIsolation: false, // TODO: なんかこれもいるみたい！
       preload: path.join(app.getAppPath(), "src/preload.js")
     }
   });
@@ -41,6 +42,16 @@ const setFontSize = (n: number) => {
   w?.webContents.executeJavaScript('setFontSize(' + n + ')');
 }
 
+const openfolder = () => {
+  let w = BrowserWindow.getFocusedWindow();
+  w?.webContents.executeJavaScript("openfolder()");
+}
+
+const createfile = () => {
+  let w = BrowserWindow.getFocusedWindow();
+  w?.webContents.executeJavaScript("createfile()");
+}
+
 const createMenu = () => {
   let menuTemp: MenuObjectType = [
     {
@@ -48,6 +59,12 @@ const createMenu = () => {
       submenu: [
         {label: "New", click: () => {
           createWindow()
+        }},
+        { label: "open folder...", click: () => {
+          openfolder();
+        }},
+        { label: "Create file", click: () => {
+          createfile();
         }},
         {role: "close"},
         {type: "separator"},
